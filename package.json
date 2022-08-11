@@ -1,11 +1,17 @@
 {
   "name": "@gergoszaszvaradi/stylelint-config",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "Personal StyleLint config",
   "main": "index.js",
   "author": "gergoszaszvaradi",
   "license": "MIT",
-  "keywords": ["stylelint", "stylelint-config", "css", "scss", "stylelint-scss"],
+  "keywords": [
+    "stylelint",
+    "stylelint-config",
+    "css",
+    "scss",
+    "stylelint-scss"
+  ],
   "dependencies": {
     "stylelint": "^14.10.0",
     "stylelint-config-standard-scss": "^5.0.0",
