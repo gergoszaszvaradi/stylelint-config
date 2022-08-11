@@ -2,7 +2,7 @@
   "name": "@gergoszaszvaradi/stylelint-config",
   "version": "1.2.0",
   "description": "Personal StyleLint config",
-  "main": "index.js",
+  "main": ".stylelintrc.js",
   "author": "gergoszaszvaradi",
   "license": "MIT",
   "keywords": [
