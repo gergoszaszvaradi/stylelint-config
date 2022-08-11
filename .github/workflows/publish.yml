@@ -1,0 +1,54 @@
+name: Publish
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: "Setup Node environment"
+        uses: actions/setup-node@v3
+        with:
+          node-version: latest
+          registry-url: https://registry.npmjs.org/
+
+      - name: Git Identity
+        run: |
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+          git remote set-url origin https://x-access-token:$GH_TOKEN@github.com/$GITHUB_REPOSITORY
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+
+      - name: Checkout and pull branch
+        run: git checkout "${GITHUB_REF:11}" && git pull
+
+      - name: "Install dependencies"
+        run: npm ci
+
+      - name: Version
+        run: |
+          git reset --hard
+          npx npm version ${{ secrets.VERSION_BUMP }}
+          git push
+
+      - name: "Publish NPM package"
+        run: npm publish --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: "Publish GitHub package"
+        run: |
+          yarn logout
+          echo "//npm.pkg.github.com/:_authToken=$GH_TOKEN" > .npmrc
+          echo "@gergoszaszvaradi:registry=https://npm.pkg.github.com/" >> .npmrc
+          npm publish --access public
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}

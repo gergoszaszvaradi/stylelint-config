@@ -1,0 +1,15 @@
+{
+    "[css]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "editor.formatOnSave": false
+    },
+
+    "[scss]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "editor.formatOnSave": false
+    },
+
+    "editor.codeActionsOnSave": {
+        "source.fixAll.stylelint": true
+    },
+}
