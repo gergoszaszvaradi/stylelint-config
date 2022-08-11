@@ -12,6 +12,9 @@
     "scss",
     "stylelint-scss"
   ],
+  "files": [
+    ".stylelintrc.js"
+  ],
   "dependencies": {
     "stylelint": "^14.10.0",
     "stylelint-config-standard-scss": "^5.0.0",

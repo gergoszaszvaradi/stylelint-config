@@ -11,7 +11,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: "Setup Node environment"
+      - name: Setup Node environment
         uses: actions/setup-node@v3
         with:
           node-version: latest
@@ -28,7 +28,7 @@ jobs:
       - name: Checkout and pull branch
         run: git checkout "${GITHUB_REF:11}" && git pull
 
-      - name: "Install dependencies"
+      - name: Install dependencies
         run: npm ci
 
       - name: Version
@@ -37,12 +37,12 @@ jobs:
           npx npm version ${{ secrets.VERSION_BUMP }}
           git push
 
-      - name: "Publish NPM package"
+      - name: Publish NPM package
         run: npm publish --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
-      - name: "Publish GitHub package"
+      - name: Publish GitHub package
         run: |
           yarn logout
           echo "//npm.pkg.github.com/:_authToken=$GH_TOKEN" > .npmrc
